@@ -33,17 +33,25 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
         body { font-family: 'Inter', sans-serif; }
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-        }
-        .dark .glass-panel {
-            background: rgba(17, 24, 39, 0.85);
-            backdrop-filter: blur(12px);
-        }
     </style>
 </head>
-<body class="h-full bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 flex flex-col overflow-hidden">
+<body class="h-full bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 flex flex-col overflow-hidden relative">
+
+    <!-- Hoş Geldin Modalı (Açılış Ekranı) -->
+    <div id="welcomeModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl text-center space-y-4">
+            <div class="w-14 h-14 bg-blue-500/10 text-blue-500 rounded-2xl flex items-center justify-center mx-auto text-2xl shadow-inner">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+            <h2 class="text-xl font-bold">STRYKER Web Builder'a Hoş Geldiniz!</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+                Bu platform sayesinde hayalinizdeki web sitesini saniyeler içinde tasarlayabilir, canlı olarak önizleyebilir ve tek tıkla indirip yayınlayabilirsiniz.
+            </p>
+            <button onclick="closeWelcomeModal()" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl transition cursor-pointer shadow-lg shadow-blue-500/25">
+                Hemen Başla 🚀
+            </button>
+        </div>
+    </div>
 
     <header class="h-16 border-b border-slate-200 dark:border-slate-800 px-6 flex items-center justify-between bg-white dark:bg-slate-900 z-10 shrink-0">
         <div class="flex items-center space-x-3">
@@ -62,7 +70,7 @@
                 <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                 <span class="text-xs font-medium">Sistem Aktif</span>
             </div>
-            <button onclick="toggleDarkMode()" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition">
+            <button onclick="toggleDarkMode()" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition cursor-pointer">
                 <i class="fa-solid fa-moon dark:hidden"></i>
                 <i class="fa-solid fa-sun hidden dark:block"></i>
             </button>
@@ -83,9 +91,9 @@
                 <div class="mt-3">
                     <p class="text-xs text-slate-500 dark:text-slate-400 mb-2 font-medium">Popüler Şablon Önerileri:</p>
                     <div class="flex flex-wrap gap-1.5">
-                        <button onclick="setPrompt('Modern ve şık bir kafe ve kahve dükkanı tanıtım sitesi, menü ve rezervasyon alanı.')" class="text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-2.5 py-1 rounded-lg transition text-slate-700 dark:text-slate-300">☕ Kahve Dükkanı</button>
-                        <button onclick="setPrompt('Kişisel portfolyo ve blog sitesi. Projelerim, hakkımda ve iletişim sekmeleri olsun.')" class="text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-2.5 py-1 rounded-lg transition text-slate-700 dark:text-slate-300">👨‍💻 Portfolyo</button>
-                        <button onclick="setPrompt('Yenilikçi bir SaaS yapay zeka yazılımı için tanıtım ve fiyatlandırma açılış sayfası (Landing Page).')" class="text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-2.5 py-1 rounded-lg transition text-slate-700 dark:text-slate-300">🚀 SaaS Startup</button>
+                        <button onclick="setPrompt('Modern ve şık bir kafe ve kahve dükkanı tanıtım sitesi, menü ve rezervasyon alanı.')" class="text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-2.5 py-1 rounded-lg transition text-slate-700 dark:text-slate-300 cursor-pointer">☕ Kahve Dükkanı</button>
+                        <button onclick="setPrompt('Kişisel portfolyo ve blog sitesi. Projelerim, hakkımda ve iletişim sekmeleri olsun.')" class="text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-2.5 py-1 rounded-lg transition text-slate-700 dark:text-slate-300 cursor-pointer">👨‍💻 Portfolyo</button>
+                        <button onclick="setPrompt('Yenilikçi bir SaaS yapay zeka yazılımı için tanıtım ve fiyatlandırma açılış sayfası (Landing Page).')" class="text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-2.5 py-1 rounded-lg transition text-slate-700 dark:text-slate-300 cursor-pointer">🚀 SaaS Startup</button>
                     </div>
                 </div>
 
@@ -99,12 +107,12 @@
             <div class="flex-1 p-5 overflow-y-auto space-y-4">
                 <div class="p-4 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/50">
                     <h3 class="font-semibold text-blue-900 dark:text-blue-300 text-sm mb-1 flex items-center">
-                        <i class="fa-solid fa-rocket mr-2"></i> Render'da Nasıl Yayınlanır?
+                        <i class="fa-solid fa-rocket mr-2"></i> Yayınlama Rehberi
                     </h3>
                     <p class="text-xs text-blue-700 dark:text-blue-400 leading-relaxed">
-                        1. <strong>"Projeyi İndir (.zip)"</strong> butonuna tıklayarak dosyaları indirin.<br>
-                        2. ZIP içindekileri GitHub deponuza yükleyin.<br>
-                        3. Render'da <strong>Publish Directory: `./`</strong> seçerek yayınlayın!
+                        1. <strong>"Projeyi İndir (.zip)"</strong> butonuyla dosyaları alın.<br>
+                        2. GitHub deponuza yükleyin.<br>
+                        3. Render üzerinde <strong>Publish Directory: `./`</strong> ayarıyla yayına alın!
                     </p>
                 </div>
 
@@ -162,11 +170,43 @@
 
     </main>
 
+    <!-- SAĞ ALT CANLI DESTEK ASİSTANI -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <!-- Sohbet Penceresi (Başlangıçta Gizli) -->
+        <div id="chatBox" class="hidden mb-3 w-80 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
+            <div class="bg-blue-600 text-white p-3.5 flex justify-between items-center">
+                <div class="flex items-center space-x-2">
+                    <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></div>
+                    <span class="font-semibold text-xs">Canlı Destek Asistanı</span>
+                </div>
+                <button onclick="toggleChat()" class="text-white hover:text-slate-200 text-sm cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <div id="chatMessages" class="p-3 h-64 overflow-y-auto space-y-3 text-xs flex flex-col bg-slate-50 dark:bg-slate-950/50">
+                <div class="bg-blue-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 p-2.5 rounded-xl max-w-[85%] self-start shadow-sm">
+                    Merhaba! Ben web site yardımcısıyım. Size nasıl yardımcı olabilirim?
+                </div>
+            </div>
+
+            <div class="p-2.5 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex gap-2">
+                <input type="text" id="chatInput" onkeypress="handleChatKey(event)" placeholder="Mesajınızı yazın..." class="flex-1 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-blue-500 dark:text-white">
+                <button onclick="sendChatMessage()" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-xl text-xs transition cursor-pointer"><i class="fa-solid fa-paper-plane"></i></button>
+            </div>
+        </div>
+
+        <!-- Canlı Destek Açma Butonu -->
+        <button onclick="toggleChat()" class="w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-xl flex items-center justify-center text-xl transition transform hover:scale-105 cursor-pointer">
+            <i class="fa-solid fa-headset"></i>
+        </button>
+    </div>
+
     <script>
         let generatedHtmlContent = "";
-        
-        // STRYKER Özel API Key
         const API_KEY = "AQ.Ab8RN6J7EDA5BQE7G32LFUeYuIrF0UdqbxD2z1UHwuzhUtYguQ";
+
+        function closeWelcomeModal() {
+            document.getElementById('welcomeModal').classList.add('hidden');
+        }
 
         function toggleDarkMode() {
             document.documentElement.classList.toggle('dark');
@@ -235,21 +275,14 @@
 
                 if (candidate && candidate.content?.parts?.[0]?.text) {
                     let rawText = candidate.content.parts[0].text;
-                    
-                    // Clean markdown code blocks if returned
                     rawText = rawText.replace(/^```html\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/, '');
-
                     generatedHtmlContent = rawText;
 
-                    // Render preview
                     previewFrame.classList.remove('hidden');
                     const blob = new Blob([generatedHtmlContent], { type: 'text/html' });
                     previewFrame.src = URL.createObjectURL(blob);
 
-                    // Render code view
                     document.getElementById('codeOutput').textContent = generatedHtmlContent;
-
-                    // Enable action buttons
                     downloadBtn.disabled = false;
                     viewCodeBtn.disabled = false;
                 } else {
@@ -268,19 +301,10 @@
 
         function downloadZip() {
             if (!generatedHtmlContent) return;
-
             const zip = new JSZip();
             zip.file("index.html", generatedHtmlContent);
-            
-            // Add a sample render.yaml for easy deployment on Render
-            const renderYaml = `services:
-  - type: web
-    name: ai-generated-website
-    env: static
-    staticPublishPath: ./
-`;
+            const renderYaml = `services:\n  - type: web\n    name: ai-generated-website\n    env: static\n    staticPublishPath: ./\n`;
             zip.file("render.yaml", renderYaml);
-
             zip.generateAsync({ type: "blob" }).then(function(content) {
                 saveAs(content, "stryker-website-project.zip");
             });
@@ -288,6 +312,51 @@
 
         function viewFullCode() {
             switchTab('code');
+        }
+
+        // Canlı Destek Sohbet Mantığı
+        function toggleChat() {
+            const chatBox = document.getElementById('chatBox');
+            chatBox.classList.toggle('hidden');
+        }
+
+        function handleChatKey(e) {
+            if (e.key === 'Enter') sendChatMessage();
+        }
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            const chatMessages = document.getElementById('chatMessages');
+
+            // Kullanıcı mesajı
+            const userMsg = document.createElement('div');
+            userMsg.className = "bg-blue-600 text-white p-2.5 rounded-xl max-w-[85%] self-end shadow-sm";
+            userMsg.textContent = message;
+            chatMessages.appendChild(userMsg);
+
+            input.value = '';
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Bot yanıtı
+            setTimeout(() => {
+                const botMsg = document.createElement('div');
+                botMsg.className = "bg-blue-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 p-2.5 rounded-xl max-w-[85%] self-start shadow-sm";
+                
+                const lowerMsg = message.toLowerCase();
+                if (lowerMsg.includes('sen kimsin') || lowerMsg.includes('neusin') || lowerMsg.includes('adın ne')) {
+                    botMsg.textContent = "Ben web site yardımcısıyım! İstediğiniz türde web sitelerini hızlıca tasarlamanız için buradayım.";
+                } else if (lowerMsg.includes('nasıl')) {
+                    botMsg.textContent = "Soldaki panele istediğiniz sitenin açıklamasını yazıp 'Web Sitesini Otomatik Oluştur' butonuna basmanız yeterlidir!";
+                } else {
+                    botMsg.textContent = "Harika bir soru! Daha fazla bilgi için soldaki şablonları kullanabilir veya site konseptinizi yazarak test edebilirsiniz.";
+                }
+
+                chatMessages.appendChild(botMsg);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 600);
         }
     </script>
 </body>
