@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STRYKER Web Builder</title>
+    <title>STRYKER Web Builder - Leaderos Ultimate Edition</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -19,11 +19,10 @@
                 extend: {
                     colors: {
                         stryker: {
-                            50: '#f0f4f9',
-                            100: '#d3e3fd',
-                            500: '#3b82f6',
-                            600: '#2563eb',
-                            700: '#1d4ed8',
+                            50: '#f0fdf4',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
                         }
                     }
                 }
@@ -31,138 +30,174 @@
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
     </style>
 </head>
-<body class="h-full bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 flex flex-col overflow-hidden relative">
+<body class="h-full bg-slate-950 text-slate-100 flex flex-col overflow-hidden relative">
 
-    <!-- Hoş Geldin Modalı (Açılış Ekranı) -->
-    <div id="welcomeModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl max-w-md w-full p-6 shadow-2xl text-center space-y-4">
-            <div class="w-14 h-14 bg-blue-500/10 text-blue-500 rounded-2xl flex items-center justify-center mx-auto text-2xl shadow-inner">
-                <i class="fa-solid fa-wand-magic-sparkles"></i>
+    <!-- Leaderos Tarzı Duyuru Barı -->
+    <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 text-white px-4 py-2 text-xs font-semibold flex items-center justify-between shrink-0 shadow-md">
+        <div class="flex items-center space-x-2 mx-auto">
+            <span class="bg-white/20 px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider">Sistem Duyurusu</span>
+            <span>⚡ STRYKER Web Builder v3.0 Ultimate Aktif Edildi. Yeni API Anahtarı Entegre Edildi!</span>
+        </div>
+    </div>
+
+    <!-- Hoş Geldin Modalı -->
+    <div id="welcomeModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-8 shadow-2xl text-center space-y-6 relative overflow-hidden">
+            <div class="absolute -top-12 -right-12 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl"></div>
+            <div class="w-16 h-16 bg-emerald-500/10 text-emerald-400 rounded-2xl flex items-center justify-center mx-auto text-3xl shadow-inner border border-emerald-500/20">
+                <i class="fa-solid fa-cube"></i>
             </div>
-            <h2 class="text-xl font-bold">STRYKER Web Builder'a Hoş Geldiniz!</h2>
-            <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                Bu platform sayesinde hayalinizdeki web sitesini saniyeler içinde tasarlayabilir, canlı olarak önizleyebilir ve tek tıkla indirip yayınlayabilirsiniz.
-            </p>
-            <button onclick="closeWelcomeModal()" class="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl transition cursor-pointer shadow-lg shadow-blue-500/25">
-                Hemen Başla 🚀
+            <div>
+                <h2 class="text-2xl font-extrabold tracking-tight mb-2">Hoş Geldin, STRYKER!</h2>
+                <p class="text-xs text-slate-400 leading-relaxed">
+                    Leaderos altyapı estetiği ve güncellenmiş yapay zeka motoru ile donatılmış yeni panelin hazır. Saniyeler içinde harika siteler tasarla.
+                </p>
+            </div>
+            <div class="grid grid-cols-3 gap-3 text-left">
+                <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
+                    <i class="fa-solid fa-bolt text-emerald-400 mb-1"></i>
+                    <div class="text-[11px] font-bold">Hızlı Üretim</div>
+                    <div class="text-[10px] text-slate-400">Tek tıkla HTML</div>
+                </div>
+                <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
+                    <i class="fa-solid fa-robot text-teal-400 mb-1"></i>
+                    <div class="text-[11px] font-bold">Yapay Zeka</div>
+                    <div class="text-[10px] text-slate-400">Akıllı canlı destek</div>
+                </div>
+                <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
+                    <i class="fa-solid fa-download text-blue-400 mb-1"></i>
+                    <div class="text-[11px] font-bold">Render Uyumlu</div>
+                    <div class="text-[10px] text-slate-400">Anında ZIP paketi</div>
+                </div>
+            </div>
+            <button onclick="closeWelcomeModal()" class="w-full py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-xl transition cursor-pointer shadow-lg shadow-emerald-600/25">
+                Panele Başla 🚀
             </button>
         </div>
     </div>
 
-    <header class="h-16 border-b border-slate-200 dark:border-slate-800 px-6 flex items-center justify-between bg-white dark:bg-slate-900 z-10 shrink-0">
+    <!-- Header / Navbar -->
+    <header class="h-18 border-b border-slate-800 px-6 flex items-center justify-between bg-slate-900/90 backdrop-blur z-10 shrink-0">
         <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-500 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
-                <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
+            <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-500 flex items-center justify-center text-white shadow-lg shadow-emerald-600/20">
+                <i class="fa-solid fa-cube text-xl"></i>
             </div>
             <div>
-                <h1 class="font-bold text-lg bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">STRYKER Web Builder</h1>
-                <p class="text-xs text-slate-500 dark:text-slate-400">Yapay Zeka Destekli Otomatik Site Oluşturucu</p>
+                <h1 class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-emerald-400 via-teal-300 to-blue-400 bg-clip-text text-transparent">STRYKER Web Builder</h1>
+                <p class="text-[11px] text-slate-400 font-medium">Leaderos Edition Core</p>
             </div>
         </div>
 
-        <!-- Controls -->
-        <div class="flex items-center space-x-3">
-            <div class="hidden md:flex items-center space-x-2 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700">
-                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                <span class="text-xs font-medium">Sistem Aktif</span>
+        <div class="flex items-center space-x-4">
+            <div class="hidden md:flex items-center space-x-2 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+                <span class="text-xs font-semibold text-emerald-400">Sistem Çevrimiçi</span>
             </div>
-            <button onclick="toggleDarkMode()" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition cursor-pointer">
-                <i class="fa-solid fa-moon dark:hidden"></i>
-                <i class="fa-solid fa-sun hidden dark:block"></i>
-            </button>
+            <div class="flex items-center space-x-2 bg-slate-800 px-3 py-1.5 rounded-xl border border-slate-700 text-xs">
+                <i class="fa-solid fa-user-shield text-emerald-400"></i>
+                <span class="font-bold text-slate-200">STRYKER</span>
+            </div>
         </div>
     </header>
 
+    <!-- Main Workspace -->
     <main class="flex-1 flex flex-col md:flex-row overflow-hidden">
         
-        <!-- Sidebar: Controls & Prompt Input -->
-        <section class="w-full md:w-[420px] lg:w-[480px] border-r border-slate-200 dark:border-slate-800 flex flex-col bg-white dark:bg-slate-900 shrink-0 z-10">
-            <div class="p-5 border-b border-slate-200 dark:border-slate-800">
-                <h2 class="font-semibold text-sm uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-2">1. Site Konseptini Belirleyin</h2>
+        <!-- Sidebar Controls -->
+        <section class="w-full md:w-[440px] lg:w-[480px] border-r border-slate-800 flex flex-col bg-slate-900 shrink-0 z-10">
+            <div class="p-5 border-b border-slate-800">
+                <div class="flex items-center justify-between mb-2">
+                    <h2 class="font-bold text-xs uppercase tracking-wider text-slate-400">1. Konsept Tanımı</h2>
+                    <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded-md font-bold">API v3.0</span>
+                </div>
                 <div class="relative">
-                    <textarea id="promptInput" rows="4" class="w-full p-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:text-white resize-none text-sm" placeholder="Örn: Modern ve minimalist bir kahve dükkanı sitesi olsun. Menü, hakkımızda ve iletişim formu içersin. Şık renkler ve kahve tonları kullan."></textarea>
+                    <textarea id="promptInput" rows="4" class="w-full p-3.5 rounded-2xl border border-slate-700 bg-slate-950 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-white resize-none text-xs placeholder-slate-600 shadow-inner" placeholder="Örn: Minecraft sunucum için gelişmiş bir Faction/Skyblock web sitesi tasarla. Mağaza, duyurular, sıralama ve giriş yap alanı olsun..."></textarea>
                 </div>
                 
-                <!-- Quick Prompts -->
+                <!-- Quick Template Buttons -->
                 <div class="mt-3">
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-2 font-medium">Popüler Şablon Önerileri:</p>
+                    <p class="text-[11px] text-slate-400 mb-2 font-semibold">Popüler Leaderos Şablonları:</p>
                     <div class="flex flex-wrap gap-1.5">
-                        <button onclick="setPrompt('Modern ve şık bir kafe ve kahve dükkanı tanıtım sitesi, menü ve rezervasyon alanı.')" class="text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-2.5 py-1 rounded-lg transition text-slate-700 dark:text-slate-300 cursor-pointer">☕ Kahve Dükkanı</button>
-                        <button onclick="setPrompt('Kişisel portfolyo ve blog sitesi. Projelerim, hakkımda ve iletişim sekmeleri olsun.')" class="text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-2.5 py-1 rounded-lg transition text-slate-700 dark:text-slate-300 cursor-pointer">👨‍💻 Portfolyo</button>
-                        <button onclick="setPrompt('Yenilikçi bir SaaS yapay zeka yazılımı için tanıtım ve fiyatlandırma açılış sayfası (Landing Page).')" class="text-xs bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 px-2.5 py-1 rounded-lg transition text-slate-700 dark:text-slate-300 cursor-pointer">🚀 SaaS Startup</button>
+                        <button onclick="setPrompt('Profesyonel bir Minecraft Sunucu ana sayfası. Oyuncu sıralaması, mağaza, kopya IP butonu ve duyurular.')" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl transition text-slate-300 border border-slate-700 cursor-pointer flex items-center space-x-1.5">
+                            <i class="fa-solid fa-gamepad text-emerald-400"></i> <span>Minecraft Server</span>
+                        </button>
+                        <button onclick="setPrompt('Modern ve şık bir kafe ve kahve dükkanı tanıtım sitesi, menü ve rezervasyon alanı.')" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl transition text-slate-300 border border-slate-700 cursor-pointer flex items-center space-x-1.5">
+                            <i class="fa-solid fa-mug-hot text-amber-400"></i> <span>Kafe / Restoran</span>
+                        </button>
+                        <button onclick="setPrompt('Yenilikçi bir SaaS yapay zeka yazılımı için tanıtım ve fiyatlandırma açılış sayfası.')" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl transition text-slate-300 border border-slate-700 cursor-pointer flex items-center space-x-1.5">
+                            <i class="fa-solid fa-rocket text-blue-400"></i> <span>SaaS Landing</span>
+                        </button>
                     </div>
                 </div>
 
-                <button id="generateBtn" onclick="generateWebsite()" class="mt-4 w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium rounded-xl shadow-lg shadow-blue-500/25 transition flex items-center justify-center space-x-2 cursor-pointer">
+                <button id="generateBtn" onclick="generateWebsite()" class="mt-4 w-full py-3.5 bg-gradient-to-r from-emerald-600 via-teal-600 to-blue-600 hover:opacity-90 text-white font-bold rounded-2xl shadow-xl shadow-emerald-600/20 transition flex items-center justify-center space-x-2 cursor-pointer">
                     <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    <span>Web Sitesini Otomatik Oluştur</span>
+                    <span>Web Sitesini Otomatik Kodla</span>
                 </button>
             </div>
 
-            <!-- Export & Render Guide Card -->
-            <div class="flex-1 p-5 overflow-y-auto space-y-4">
-                <div class="p-4 rounded-xl bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-900/50">
-                    <h3 class="font-semibold text-blue-900 dark:text-blue-300 text-sm mb-1 flex items-center">
-                        <i class="fa-solid fa-rocket mr-2"></i> Yayınlama Rehberi
+            <!-- Export & Panel Guide -->
+            <div class="flex-1 p-5 overflow-y-auto space-y-4 bg-slate-900/50">
+                <div class="p-4 rounded-2xl bg-slate-800/80 border border-slate-700/80 shadow-md">
+                    <h3 class="font-bold text-emerald-400 text-xs mb-1.5 flex items-center">
+                        <i class="fa-solid fa-server mr-2 text-sm"></i> Render Yayınlama Kılavuzu
                     </h3>
-                    <p class="text-xs text-blue-700 dark:text-blue-400 leading-relaxed">
-                        1. <strong>"Projeyi İndir (.zip)"</strong> butonuyla dosyaları alın.<br>
-                        2. GitHub deponuza yükleyin.<br>
-                        3. Render üzerinde <strong>Publish Directory: `./`</strong> ayarıyla yayına alın!
+                    <p class="text-[11px] text-slate-400 leading-relaxed">
+                        1. <strong>"Projeyi İndir (.zip)"</strong> butonuna basarak tüm kodları ve render ayar dosyasını al.<br>
+                        2. GitHub depona yükle.<br>
+                        3. Render panelinde <strong>Publish Directory: `./`</strong> seçerek yayına al!
                     </p>
                 </div>
 
-                <div class="space-y-2">
-                    <button onclick="downloadZip()" id="downloadBtn" disabled class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium rounded-xl shadow-md transition flex items-center justify-center space-x-2 text-sm cursor-pointer">
-                        <i class="fa-solid fa-file-zipper"></i>
+                <div class="space-y-2.5">
+                    <button onclick="downloadZip()" id="downloadBtn" disabled class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold rounded-xl shadow-lg transition flex items-center justify-center space-x-2 text-xs cursor-pointer">
+                        <i class="fa-solid fa-file-zipper text-sm"></i>
                         <span>Projeyi İndir (.zip)</span>
                     </button>
                     
-                    <button onclick="viewFullCode()" id="viewCodeBtn" disabled class="w-full py-2.5 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium rounded-xl transition flex items-center justify-center space-x-2 text-sm cursor-pointer">
-                        <i class="fa-solid fa-code"></i>
-                        <span>Kodları Görüntüle</span>
+                    <button onclick="viewFullCode()" id="viewCodeBtn" disabled class="w-full py-3 bg-slate-800 hover:bg-slate-700 disabled:opacity-40 disabled:cursor-not-allowed text-slate-200 font-bold rounded-xl transition border border-slate-700 flex items-center justify-center space-x-2 text-xs cursor-pointer">
+                        <i class="fa-solid fa-code text-sm"></i>
+                        <span>Kaynak Kodları İncele</span>
                     </button>
                 </div>
             </div>
         </section>
 
-        <section class="flex-1 flex flex-col bg-slate-100 dark:bg-slate-950 overflow-hidden relative">
-            <!-- View Mode Switcher Header -->
-            <div class="h-14 border-b border-slate-200 dark:border-slate-800 px-6 flex items-center justify-between bg-white dark:bg-slate-900 shrink-0">
+        <!-- Preview and Code Canvas -->
+        <section class="flex-1 flex flex-col bg-slate-950 overflow-hidden relative">
+            <div class="h-14 border-b border-slate-800 px-6 flex items-center justify-between bg-slate-900 shrink-0">
                 <div class="flex items-center space-x-2">
-                    <button onclick="switchTab('preview')" id="tabPreview" class="px-4 py-1.5 rounded-lg text-sm font-medium bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 transition cursor-pointer">
-                        <i class="fa-solid fa-eye mr-1.5"></i> Canlı Önizleme
+                    <button onclick="switchTab('preview')" id="tabPreview" class="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 transition cursor-pointer flex items-center space-x-1.5">
+                        <i class="fa-solid fa-eye"></i> <span>Canlı Önizleme</span>
                     </button>
-                    <button onclick="switchTab('code')" id="tabCode" class="px-4 py-1.5 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer">
-                        <i class="fa-solid fa-file-code mr-1.5"></i> Kaynak Kod (HTML)
+                    <button onclick="switchTab('code')" id="tabCode" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:bg-slate-800 transition cursor-pointer flex items-center space-x-1.5">
+                        <i class="fa-solid fa-file-code"></i> <span>Kaynak Kod (HTML)</span>
                     </button>
                 </div>
 
-                <div class="flex items-center space-x-2 text-xs text-slate-500 dark:text-slate-400">
-                    <span id="statusIndicator" class="hidden flex items-center"><i class="fa-solid fa-circle-notch fa-spin mr-1.5 text-blue-500"></i> Sistem sitenizi kodluyor...</span>
+                <div class="flex items-center space-x-2 text-xs text-slate-400">
+                    <span id="statusIndicator" class="hidden flex items-center"><i class="fa-solid fa-circle-notch fa-spin mr-2 text-emerald-400"></i> Yapay zeka modülü kod üretiyor...</span>
                 </div>
             </div>
 
-            <!-- View Area -->
+            <!-- Canvas View Area -->
             <div class="flex-1 relative overflow-hidden flex flex-col">
-                <!-- Preview Canvas View -->
-                <div id="previewContainer" class="flex-1 w-full h-full bg-white dark:bg-slate-900 flex items-center justify-center relative">
-                    <div id="placeholderState" class="text-center p-8 max-w-md">
-                        <div class="w-16 h-16 bg-blue-50 dark:bg-blue-950/50 rounded-2xl flex items-center justify-center mx-auto mb-4 text-blue-500 text-2xl shadow-inner">
-                            <i class="fa-solid fa-laptop-code"></i>
+                <div id="previewContainer" class="flex-1 w-full h-full bg-slate-900 flex items-center justify-center relative">
+                    <div id="placeholderState" class="text-center p-8 max-w-sm">
+                        <div class="w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center mx-auto mb-4 text-emerald-400 text-2xl shadow-inner border border-slate-700">
+                            <i class="fa-solid fa-code"></i>
                         </div>
-                        <h3 class="font-bold text-lg mb-1">Önizleme Alanı Boş</h3>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">Soldaki panele istediğiniz web sitesi konseptini yazın ve oluştur butonuna tıklayın.</p>
+                        <h3 class="font-bold text-sm mb-1 text-white">Önizleme Bekleniyor</h3>
+                        <p class="text-xs text-slate-400">Soldaki panele konseptini girip oluştur butonuna basın.</p>
                     </div>
                     <iframe id="previewFrame" class="w-full h-full border-0 hidden"></iframe>
                 </div>
 
-                <!-- Code View -->
-                <div id="codeContainer" class="flex-1 w-full h-full bg-slate-950 text-slate-200 font-mono text-xs p-4 overflow-auto hidden">
+                <div id="codeContainer" class="flex-1 w-full h-full bg-slate-950 text-slate-200 font-mono text-xs p-5 overflow-auto hidden">
                     <pre><code id="codeOutput" class="language-html">/* Henüz kod üretilmedi */</code></pre>
                 </div>
             </div>
@@ -170,46 +205,43 @@
 
     </main>
 
-    <!-- SAĞ ALT CANLI DESTEK ASİSTANI -->
+    <!-- SAĞ ALT CANLI DESTEK ASİSTANI (Leaderos Tarzı & Yapay Zeka Entegreli) -->
     <div class="fixed bottom-6 right-6 z-50">
-        <!-- Sohbet Penceresi (Başlangıçta Gizli) -->
-        <div id="chatBox" class="hidden mb-3 w-80 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl flex flex-col overflow-hidden">
-            <div class="bg-blue-600 text-white p-3.5 flex justify-between items-center">
-                <div class="flex items-center space-x-2">
-                    <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></div>
-                    <span class="font-semibold text-xs">Canlı Destek Asistanı</span>
+        <div id="chatBox" class="hidden mb-3 w-80 md:w-96 bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl flex flex-col overflow-hidden">
+            <div class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white p-4 flex justify-between items-center shadow-md">
+                <div class="flex items-center space-x-2.5">
+                    <div class="w-3 h-3 rounded-full bg-emerald-300 animate-pulse"></div>
+                    <div>
+                        <div class="font-bold text-xs">Canlı Destek & AI Asistan</div>
+                        <div class="text-[10px] text-emerald-100 opacity-90">Çevrimiçi / STRYKER Sistem</div>
+                    </div>
                 </div>
-                <button onclick="toggleChat()" class="text-white hover:text-slate-200 text-sm cursor-pointer"><i class="fa-solid fa-xmark"></i></button>
+                <button onclick="toggleChat()" class="text-white hover:text-slate-200 text-sm cursor-pointer p-1"><i class="fa-solid fa-xmark"></i></button>
             </div>
             
-            <div id="chatMessages" class="p-3 h-64 overflow-y-auto space-y-3 text-xs flex flex-col bg-slate-50 dark:bg-slate-950/50">
-                <div class="bg-blue-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 p-2.5 rounded-xl max-w-[85%] self-start shadow-sm">
-                    Merhaba! Ben web site yardımcısıyım. Size nasıl yardımcı olabilirim?
+            <div id="chatMessages" class="p-4 h-72 overflow-y-auto space-y-3 text-xs flex flex-col bg-slate-950/70">
+                <div class="bg-slate-800 text-slate-200 p-3 rounded-2xl max-w-[85%] self-start shadow-sm border border-slate-700/50">
+                    Merhaba! Ben web site yardımcısıyım. STRYKER Builder hakkında her şeyi bana sorabilirsin!
                 </div>
             </div>
 
-            <div class="p-2.5 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex gap-2">
-                <input type="text" id="chatInput" onkeypress="handleChatKey(event)" placeholder="Mesajınızı yazın..." class="flex-1 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-xs focus:outline-none focus:border-blue-500 dark:text-white">
-                <button onclick="sendChatMessage()" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-xl text-xs transition cursor-pointer"><i class="fa-solid fa-paper-plane"></i></button>
+            <div class="p-3 border-t border-slate-800 bg-slate-900 flex gap-2">
+                <input type="text" id="chatInput" onkeypress="handleChatKey(event)" placeholder="Sorunuzu yazın..." class="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-emerald-500 text-white placeholder-slate-600">
+                <button onclick="sendChatMessage()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2.5 rounded-xl text-xs transition cursor-pointer shadow-md font-bold"><i class="fa-solid fa-paper-plane"></i></button>
             </div>
         </div>
 
-        <!-- Canlı Destek Açma Butonu -->
-        <button onclick="toggleChat()" class="w-14 h-14 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-xl flex items-center justify-center text-xl transition transform hover:scale-105 cursor-pointer">
+        <button onclick="toggleChat()" class="w-14 h-14 bg-gradient-to-tr from-emerald-600 to-teal-500 hover:opacity-90 text-white rounded-2xl shadow-2xl flex items-center justify-center text-xl transition transform hover:scale-105 cursor-pointer border border-emerald-400/30">
             <i class="fa-solid fa-headset"></i>
         </button>
     </div>
 
     <script>
         let generatedHtmlContent = "";
-        const API_KEY = "AQ.Ab8RN6J7EDA5BQE7G32LFUeYuIrF0UdqbxD2z1UHwuzhUtYguQ";
+        const API_KEY = "AQ.Ab8RN6LgCtz_ASJDnmZSGLowFV-dBBAM_K3Bcl8nRGpoZKC6RQ";
 
         function closeWelcomeModal() {
             document.getElementById('welcomeModal').classList.add('hidden');
-        }
-
-        function toggleDarkMode() {
-            document.documentElement.classList.toggle('dark');
         }
 
         function setPrompt(text) {
@@ -223,16 +255,36 @@
             const codeContainer = document.getElementById('codeContainer');
 
             if (tab === 'preview') {
-                previewTab.className = "px-4 py-1.5 rounded-lg text-sm font-medium bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 transition cursor-pointer";
-                codeTab.className = "px-4 py-1.5 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer";
+                previewTab.className = "px-4 py-2 rounded-xl text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 transition cursor-pointer flex items-center space-x-1.5";
+                codeTab.className = "px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:bg-slate-800 transition cursor-pointer flex items-center space-x-1.5";
                 previewContainer.classList.remove('hidden');
                 codeContainer.classList.add('hidden');
             } else {
-                codeTab.className = "px-4 py-1.5 rounded-lg text-sm font-medium bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 transition cursor-pointer";
-                previewTab.className = "px-4 py-1.5 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer";
+                codeTab.className = "px-4 py-2 rounded-xl text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 transition cursor-pointer flex items-center space-x-1.5";
+                previewTab.className = "px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:bg-slate-800 transition cursor-pointer flex items-center space-x-1.5";
                 codeContainer.classList.remove('hidden');
                 previewContainer.classList.add('hidden');
             }
+        }
+
+        async function callGeminiApi(promptText, systemInstructionText) {
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
+            const payload = {
+                contents: [{ parts: [{ text: promptText }] }],
+                systemInstruction: { parts: [{ text: systemInstructionText }] }
+            };
+
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            const result = await response.json();
+            if (result.error) {
+                throw new Error(result.error.message || 'API Hatası');
+            }
+            return result.candidates?.[0]?.content?.parts?.[0]?.text;
         }
 
         async function generateWebsite() {
@@ -250,31 +302,15 @@
             const viewCodeBtn = document.getElementById('viewCodeBtn');
 
             generateBtn.disabled = true;
-            generateBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Oluşturuluyor...';
+            generateBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Kodlanıyor...';
             statusIndicator.classList.remove('hidden');
             placeholderState.classList.add('hidden');
 
-            const systemInstruction = "Sen profesyonel bir Full-Stack Web Geliştiricisi ve Tasarımcısısın. Kullanıcının isteğine göre eksiksiz, modern, Tailwind CSS kullanan, tamamen duyarlı (responsive), şık ikonlara (FontAwesome) ve yüksek estetiğe sahip tek dosyalık bir HTML (index.html) sayfası üret. Sadece saf HTML kodunu dön ve markdown blokları (```html ... ```) haricinde hiçbir ek metin veya açıklama yazma.";
-
-            const payload = {
-                contents: [{ parts: [{ text: prompt }] }],
-                systemInstruction: { parts: [{ text: systemInstruction }] }
-            };
-
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
+            const systemInstruction = "Sen profesyonel bir Full-Stack Web Geliştiricisi ve Leaderos tema uzmanısın. Kullanıcının isteğine göre eksiksiz, modern, Tailwind CSS kullanan, tamamen duyarlı (responsive), şık ikonlara (FontAwesome) ve yüksek estetiğe sahip tek dosyalık bir HTML (index.html) sayfası üret. Sadece saf HTML kodunu dön ve markdown blokları (```html ... ```) haricinde hiçbir ek metin veya açıklama yazma.";
 
             try {
-                let response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-
-                let result = await response.json();
-                let candidate = result.candidates?.[0];
-
-                if (candidate && candidate.content?.parts?.[0]?.text) {
-                    let rawText = candidate.content.parts[0].text;
+                let rawText = await callGeminiApi(prompt, systemInstruction);
+                if (rawText) {
                     rawText = rawText.replace(/^```html\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/, '');
                     generatedHtmlContent = rawText;
 
@@ -286,15 +322,15 @@
                     downloadBtn.disabled = false;
                     viewCodeBtn.disabled = false;
                 } else {
-                    throw new Error(result.error?.message || 'Sistemden geçerli bir yanıt alınamadı.');
+                    throw new Error('Sistemden yanıt alınamadı.');
                 }
             } catch (error) {
                 console.error(error);
-                alert('Web sitesi üretilirken bir hata oluştu: ' + error.message);
+                alert('Hata oluştu: ' + error.message);
                 placeholderState.classList.remove('hidden');
             } finally {
                 generateBtn.disabled = false;
-                generateBtn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i><span>Web Sitesini Otomatik Oluştur</span>';
+                generateBtn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i><span>Web Sitesini Otomatik Kodla</span>';
                 statusIndicator.classList.add('hidden');
             }
         }
@@ -303,10 +339,10 @@
             if (!generatedHtmlContent) return;
             const zip = new JSZip();
             zip.file("index.html", generatedHtmlContent);
-            const renderYaml = `services:\n  - type: web\n    name: ai-generated-website\n    env: static\n    staticPublishPath: ./\n`;
+            const renderYaml = `services:\n  - type: web\n    name: stryker-leaderos-site\n    env: static\n    staticPublishPath: ./\n`;
             zip.file("render.yaml", renderYaml);
             zip.generateAsync({ type: "blob" }).then(function(content) {
-                saveAs(content, "stryker-website-project.zip");
+                saveAs(content, "stryker-leaderos-project.zip");
             });
         }
 
@@ -314,7 +350,7 @@
             switchTab('code');
         }
 
-        // Canlı Destek Sohbet Mantığı
+        // Canlı Destek Yapay Zeka Entegrasyonu
         function toggleChat() {
             const chatBox = document.getElementById('chatBox');
             chatBox.classList.toggle('hidden');
@@ -324,39 +360,49 @@
             if (e.key === 'Enter') sendChatMessage();
         }
 
-        function sendChatMessage() {
+        async function sendChatMessage() {
             const input = document.getElementById('chatInput');
             const message = input.value.trim();
             if (!message) return;
 
             const chatMessages = document.getElementById('chatMessages');
 
-            // Kullanıcı mesajı
+            // Kullanıcı mesajı ekle
             const userMsg = document.createElement('div');
-            userMsg.className = "bg-blue-600 text-white p-2.5 rounded-xl max-w-[85%] self-end shadow-sm";
+            userMsg.className = "bg-emerald-600 text-white p-3 rounded-2xl max-w-[85%] self-end shadow-sm font-medium";
             userMsg.textContent = message;
             chatMessages.appendChild(userMsg);
 
             input.value = '';
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            // Bot yanıtı
-            setTimeout(() => {
-                const botMsg = document.createElement('div');
-                botMsg.className = "bg-blue-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 p-2.5 rounded-xl max-w-[85%] self-start shadow-sm";
-                
-                const lowerMsg = message.toLowerCase();
-                if (lowerMsg.includes('sen kimsin') || lowerMsg.includes('neusin') || lowerMsg.includes('adın ne')) {
-                    botMsg.textContent = "Ben web site yardımcısıyım! İstediğiniz türde web sitelerini hızlıca tasarlamanız için buradayım.";
-                } else if (lowerMsg.includes('nasıl')) {
-                    botMsg.textContent = "Soldaki panele istediğiniz sitenin açıklamasını yazıp 'Web Sitesini Otomatik Oluştur' butonuna basmanız yeterlidir!";
-                } else {
-                    botMsg.textContent = "Harika bir soru! Daha fazla bilgi için soldaki şablonları kullanabilir veya site konseptinizi yazarak test edebilirsiniz.";
-                }
+            // Bekleme balonu
+            const loadingMsg = document.createElement('div');
+            loadingMsg.className = "bg-slate-800 text-slate-400 p-3 rounded-2xl max-w-[85%] self-start shadow-sm text-[11px] border border-slate-700/50 flex items-center space-x-2";
+            loadingMsg.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin text-emerald-400"></i><span>Yapay zeka düşünüyor...</span>';
+            chatMessages.appendChild(loadingMsg);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
 
+            const chatSystemInstruction = "Sen STRYKER Web Builder panelinin resmi canlı destek asistanısın. Kullanıcı sana 'Sen kimsin?' veya benzeri bir soru sorduğunda kesinlikle 'Ben web site yardımcısıyım' de. Kısa, yardımsever, Leaderos ve web tasarımı odaklı yanıtlar ver.";
+
+            try {
+                let botReply = await callGeminiApi(message, chatSystemInstruction);
+                chatMessages.removeChild(loadingMsg);
+
+                const botMsg = document.createElement('div');
+                botMsg.className = "bg-slate-800 text-slate-200 p-3 rounded-2xl max-w-[85%] self-start shadow-sm border border-slate-700/50";
+                botMsg.textContent = botReply || "Yanıt alınamadı.";
                 chatMessages.appendChild(botMsg);
                 chatMessages.scrollTop = chatMessages.scrollHeight;
-            }, 600);
+
+            } catch (error) {
+                console.error(error);
+                chatMessages.removeChild(loadingMsg);
+                const errorMsg = document.createElement('div');
+                errorMsg.className = "bg-rose-900/50 text-rose-200 p-3 rounded-2xl max-w-[85%] self-start shadow-sm border border-rose-800";
+                errorMsg.textContent = "Bağlantı hatası oluştu: " + error.message;
+                chatMessages.appendChild(errorMsg);
+            }
         }
     </script>
 </body>
