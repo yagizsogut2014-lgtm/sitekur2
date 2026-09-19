@@ -4,13 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STRYKER Web Builder - Ultimate Edition</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- JSZip for exporting project files -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <!-- FileSaver.js for saving the zip -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
     <script>
         tailwind.config = {
@@ -19,10 +15,21 @@
                 extend: {
                     colors: {
                         stryker: {
-                            50: '#f0fdf4',
+                            50: '#ecfdf5',
+                            400: '#34d399',
                             500: '#10b981',
                             600: '#059669',
                             700: '#047857',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
                         }
                     }
                 }
@@ -32,213 +39,233 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+        .glow-emerald {
+            box-shadow: 0 0 40px -10px rgba(16, 185, 129, 0.4);
+        }
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #0f172a; }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #10b981; }
     </style>
 </head>
 <body class="h-full bg-slate-950 text-slate-100 flex flex-col overflow-hidden relative">
 
-    <!-- Üst Duyuru Barı -->
-    <div class="bg-gradient-to-r from-emerald-600 via-cyan-600 to-indigo-600 text-white px-4 py-2 text-xs font-semibold flex items-center justify-between shrink-0 shadow-md">
-        <div class="flex items-center space-x-2 mx-auto">
-            <span class="bg-white/20 px-2 py-0.5 rounded-full text-[10px] uppercase tracking-wider">Özel Sürüm</span>
-            <span>⚡ STRYKER Web Builder v4.0 Aktif Edildi. Sınırsız Yapay Zeka Gücü Devrede!</span>
+    <!-- Üst Banner -->
+    <div class="bg-gradient-to-r from-emerald-600 via-cyan-600 to-indigo-600 text-white px-4 py-2.5 text-xs font-semibold flex items-center justify-center shrink-0 shadow-lg">
+        <div class="flex items-center space-x-3">
+            <span class="bg-white/20 px-2.5 py-0.5 rounded-full text-[10px] uppercase tracking-wider font-bold">Özel Sürüm</span>
+            <span class="hidden sm:inline">⚡ STRYKER Web Builder v4.1 • Sınırsız Yapay Zeka Gücü Aktif</span>
+            <span class="sm:hidden">⚡ v4.1 Aktif</span>
         </div>
     </div>
 
     <!-- Hoş Geldin Modalı -->
-    <div id="welcomeModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-8 shadow-2xl text-center space-y-6 relative overflow-hidden">
-            <div class="absolute -top-12 -right-12 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl"></div>
-            <div class="w-16 h-16 bg-emerald-500/10 text-emerald-400 rounded-2xl flex items-center justify-center mx-auto text-3xl shadow-inner border border-emerald-500/20">
+    <div id="welcomeModal" class="fixed inset-0 bg-black/85 backdrop-blur-xl z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-700/80 rounded-3xl max-w-lg w-full p-8 shadow-2xl text-center space-y-6 relative overflow-hidden glow-emerald">
+            <div class="absolute -top-20 -right-20 w-48 h-48 bg-emerald-500/15 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-16 -left-16 w-40 h-40 bg-cyan-500/10 rounded-full blur-3xl"></div>
+            
+            <div class="w-18 h-18 bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 text-emerald-400 rounded-2xl flex items-center justify-center mx-auto text-4xl shadow-inner border border-emerald-500/30 animate-float">
                 <i class="fa-solid fa-code"></i>
             </div>
+            
             <div>
-                <h2 class="text-2xl font-extrabold tracking-tight mb-2">Hoş Geldin, STRYKER!</h2>
-                <p class="text-xs text-slate-400 leading-relaxed">
-                    Tamamen sana özel tasarlanmış, gelişmiş yapay zeka ve modern arayüzle donatılmış panelin hazır. Harika web siteleri üretmeye başla.
+                <h2 class="text-2xl font-extrabold tracking-tight mb-2 bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">Hoş Geldin, STRYKER!</h2>
+                <p class="text-sm text-slate-400 leading-relaxed">
+                    Tamamen sana özel tasarlanmış, gelişmiş yapay zeka destekli web builder hazır. Harika siteler üretmeye başla.
                 </p>
             </div>
+            
             <div class="grid grid-cols-3 gap-3 text-left">
-                <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
-                    <i class="fa-solid fa-bolt text-emerald-400 mb-1"></i>
-                    <div class="text-[11px] font-bold">Hızlı Üretim</div>
-                    <div class="text-[10px] text-slate-400">Tek tıkla HTML</div>
+                <div class="bg-slate-800/60 p-3.5 rounded-2xl border border-slate-700/50 hover:border-emerald-500/30 transition">
+                    <i class="fa-solid fa-bolt text-emerald-400 mb-2 text-lg"></i>
+                    <div class="text-xs font-bold">Hızlı Üretim</div>
+                    <div class="text-[10px] text-slate-400 mt-0.5">Tek tıkla HTML</div>
                 </div>
-                <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
-                    <i class="fa-solid fa-robot text-cyan-400 mb-1"></i>
-                    <div class="text-[11px] font-bold">Yapay Zeka</div>
-                    <div class="text-[10px] text-slate-400">Akıllı asistan</div>
+                <div class="bg-slate-800/60 p-3.5 rounded-2xl border border-slate-700/50 hover:border-cyan-500/30 transition">
+                    <i class="fa-solid fa-robot text-cyan-400 mb-2 text-lg"></i>
+                    <div class="text-xs font-bold">Yapay Zeka</div>
+                    <div class="text-[10px] text-slate-400 mt-0.5">Akıllı asistan</div>
                 </div>
-                <div class="bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
-                    <i class="fa-solid fa-download text-indigo-400 mb-1"></i>
-                    <div class="text-[11px] font-bold">ZIP İndirme</div>
-                    <div class="text-[10px] text-slate-400">Render uyumlu</div>
+                <div class="bg-slate-800/60 p-3.5 rounded-2xl border border-slate-700/50 hover:border-indigo-500/30 transition">
+                    <i class="fa-solid fa-download text-indigo-400 mb-2 text-lg"></i>
+                    <div class="text-xs font-bold">ZIP İndirme</div>
+                    <div class="text-[10px] text-slate-400 mt-0.5">Render uyumlu</div>
                 </div>
             </div>
-            <button onclick="closeWelcomeModal()" class="w-full py-3.5 bg-gradient-to-r from-emerald-600 to-cyan-600 hover:opacity-90 text-white font-bold rounded-xl transition cursor-pointer shadow-lg shadow-emerald-600/25">
+            
+            <button onclick="closeWelcomeModal()" class="w-full py-4 bg-gradient-to-r from-emerald-600 to-cyan-600 hover:opacity-90 text-white font-bold rounded-2xl transition cursor-pointer shadow-xl shadow-emerald-600/30 text-sm">
                 Panele Başla 🚀
             </button>
         </div>
     </div>
 
-    <!-- Header / Navbar -->
-    <header class="h-18 border-b border-slate-800 px-6 flex items-center justify-between bg-slate-900/90 backdrop-blur z-10 shrink-0">
+    <!-- Header -->
+    <header class="h-16 border-b border-slate-800/80 px-5 md:px-6 flex items-center justify-between bg-slate-900/80 backdrop-blur-xl z-10 shrink-0">
         <div class="flex items-center space-x-3">
-            <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-emerald-600 to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-emerald-600/20">
-                <i class="fa-solid fa-terminal text-xl"></i>
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-emerald-600/30">
+                <i class="fa-solid fa-terminal text-lg"></i>
             </div>
             <div>
-                <h1 class="font-extrabold text-lg tracking-tight bg-gradient-to-r from-emerald-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent">STRYKER Web Builder</h1>
-                <p class="text-[11px] text-slate-400 font-medium">Core Studio v4.0</p>
+                <h1 class="font-extrabold text-base md:text-lg tracking-tight bg-gradient-to-r from-emerald-400 via-cyan-300 to-indigo-400 bg-clip-text text-transparent">STRYKER Web Builder</h1>
+                <p class="text-[10px] text-slate-500 font-medium">Core Studio v4.1</p>
             </div>
         </div>
-
-        <div class="flex items-center space-x-4">
-            <div class="hidden md:flex items-center space-x-2 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+        <div class="flex items-center space-x-3">
+            <div class="hidden sm:flex items-center space-x-2 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700/80">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
                 <span class="text-xs font-semibold text-emerald-400">Sistem Aktif</span>
             </div>
-            <div class="flex items-center space-x-2 bg-slate-800 px-3 py-1.5 rounded-xl border border-slate-700 text-xs">
+            <div class="flex items-center space-x-2 bg-slate-800/80 px-3 py-1.5 rounded-xl border border-slate-700/80 text-xs">
                 <i class="fa-solid fa-user-gear text-emerald-400"></i>
                 <span class="font-bold text-slate-200">STRYKER</span>
             </div>
         </div>
     </header>
 
-    <!-- Main Workspace -->
-    <main class="flex-1 flex flex-col md:flex-row overflow-hidden">
+    <!-- Main -->
+    <main class="flex-1 flex flex-col lg:flex-row overflow-hidden">
         
-        <!-- Sidebar Controls -->
-        <section class="w-full md:w-[440px] lg:w-[480px] border-r border-slate-800 flex flex-col bg-slate-900 shrink-0 z-10">
-            <div class="p-5 border-b border-slate-800">
-                <div class="flex items-center justify-between mb-2">
+        <!-- Sol Panel -->
+        <section class="w-full lg:w-[420px] xl:w-[460px] border-r border-slate-800/80 flex flex-col bg-slate-900/50 shrink-0 z-10">
+            <div class="p-5 border-b border-slate-800/80">
+                <div class="flex items-center justify-between mb-3">
                     <h2 class="font-bold text-xs uppercase tracking-wider text-slate-400">1. Proje Konsepti</h2>
-                    <span class="text-[10px] bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded-md font-bold">API v2.5 Flash</span>
-                </div>
-                <div class="relative">
-                    <textarea id="promptInput" rows="4" class="w-full p-3.5 rounded-2xl border border-slate-700 bg-slate-950 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-white resize-none text-xs placeholder-slate-600 shadow-inner" placeholder="Örn: Modern bir oyun ağı ve topluluk sunucusu için ana sayfa tasarla. Kopya IP butonu, oyuncu istatistikleri, mağaza ve duyurular olsun..."></textarea>
+                    <span class="text-[10px] bg-emerald-500/15 text-emerald-400 px-2.5 py-1 rounded-lg font-bold border border-emerald-500/20">Gemini 2.5 Flash</span>
                 </div>
                 
-                <!-- Quick Template Buttons -->
-                <div class="mt-3">
-                    <p class="text-[11px] text-slate-400 mb-2 font-semibold">Hazır Şablonlar:</p>
-                    <div class="flex flex-wrap gap-1.5">
-                        <button onclick="setPrompt('Gelişmiş bir Minecraft / Oyun Ağları ana sayfası. Kopya IP butonu, sıralama, mağaza ve duyurular.')" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl transition text-slate-300 border border-slate-700 cursor-pointer flex items-center space-x-1.5">
+                <textarea id="promptInput" rows="5" class="w-full p-4 rounded-2xl border border-slate-700/80 bg-slate-950/80 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/50 text-white resize-none text-sm placeholder-slate-600 shadow-inner transition" placeholder="Örn: Modern bir oyun ağı ve topluluk sunucusu için ana sayfa. Kopya IP butonu, oyuncu istatistikleri, mağaza ve duyurular olsun..."></textarea>
+                
+                <!-- Şablonlar -->
+                <div class="mt-4">
+                    <p class="text-[11px] text-slate-500 mb-2.5 font-semibold">Hazır Şablonlar:</p>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="setPrompt('Gelişmiş bir Minecraft / Oyun Ağları ana sayfası. Kopya IP butonu, sıralama, mağaza, duyurular ve modern koyu tema olsun.')" class="text-xs bg-slate-800/80 hover:bg-slate-700/80 px-3 py-2 rounded-xl transition text-slate-300 border border-slate-700/60 cursor-pointer flex items-center space-x-1.5 hover:border-emerald-500/40">
                             <i class="fa-solid fa-gamepad text-emerald-400"></i> <span>Oyun / Sunucu</span>
                         </button>
-                        <button onclick="setPrompt('Modern ve şık bir portfolyo / kişisel tanıtım ve blog web sitesi.')" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl transition text-slate-300 border border-slate-700 cursor-pointer flex items-center space-x-1.5">
-                            <i class="fa-solid fa-user-tie text-cyan-400"></i> <span>Kişisel Portfolyo</span>
+                        <button onclick="setPrompt('Modern ve şık bir portfolyo / kişisel tanıtım ve blog web sitesi. Animasyonlu, minimal ve profesyonel olsun.')" class="text-xs bg-slate-800/80 hover:bg-slate-700/80 px-3 py-2 rounded-xl transition text-slate-300 border border-slate-700/60 cursor-pointer flex items-center space-x-1.5 hover:border-cyan-500/40">
+                            <i class="fa-solid fa-user-tie text-cyan-400"></i> <span>Portfolyo</span>
                         </button>
-                        <button onclick="setPrompt('Yenilikçi bir teknoloji veya yazılım girişimi için SaaS tanıtım sayfası.')" class="text-xs bg-slate-800 hover:bg-slate-700 px-3 py-1.5 rounded-xl transition text-slate-300 border border-slate-700 cursor-pointer flex items-center space-x-1.5">
+                        <button onclick="setPrompt('Yenilikçi bir teknoloji veya yazılım girişimi için SaaS tanıtım (landing) sayfası. Fiyatlandırma, özellikler ve CTA butonları olsun.')" class="text-xs bg-slate-800/80 hover:bg-slate-700/80 px-3 py-2 rounded-xl transition text-slate-300 border border-slate-700/60 cursor-pointer flex items-center space-x-1.5 hover:border-indigo-500/40">
                             <i class="fa-solid fa-rocket text-indigo-400"></i> <span>SaaS Landing</span>
                         </button>
                     </div>
                 </div>
-
-                <button id="generateBtn" onclick="generateWebsite()" class="mt-4 w-full py-3.5 bg-gradient-to-r from-emerald-600 via-cyan-600 to-indigo-600 hover:opacity-90 text-white font-bold rounded-2xl shadow-xl shadow-emerald-600/20 transition flex items-center justify-center space-x-2 cursor-pointer">
+                
+                <button id="generateBtn" onclick="generateWebsite()" class="mt-5 w-full py-4 bg-gradient-to-r from-emerald-600 via-cyan-600 to-indigo-600 hover:opacity-90 text-white font-bold rounded-2xl shadow-xl shadow-emerald-600/25 transition flex items-center justify-center space-x-2.5 cursor-pointer text-sm">
                     <i class="fa-solid fa-wand-magic-sparkles"></i>
                     <span>Web Sitesini Otomatik Kodla</span>
                 </button>
             </div>
-
-            <!-- Export & Panel Guide -->
-            <div class="flex-1 p-5 overflow-y-auto space-y-4 bg-slate-900/50">
-                <div class="p-4 rounded-2xl bg-slate-800/80 border border-slate-700/80 shadow-md">
-                    <h3 class="font-bold text-emerald-400 text-xs mb-1.5 flex items-center">
-                        <i class="fa-solid fa-cloud-arrow-up mr-2 text-sm"></i> Yayınlama Kılavuzu
+            
+            <!-- Alt kısım -->
+            <div class="flex-1 p-5 overflow-y-auto space-y-4 bg-slate-900/30">
+                <div class="p-4 rounded-2xl bg-slate-800/50 border border-slate-700/50">
+                    <h3 class="font-bold text-emerald-400 text-xs mb-2 flex items-center">
+                        <i class="fa-solid fa-cloud-arrow-up mr-2"></i> Yayınlama Kılavuzu
                     </h3>
                     <p class="text-[11px] text-slate-400 leading-relaxed">
-                        1. <strong>"Projeyi İndir (.zip)"</strong> butonuna basarak tüm kodları ve render ayar dosyasını al.<br>
-                        2. GitHub depona yükle.<br>
-                        3. Render panelinde <strong>Publish Directory: `./`</strong> seçerek yayına al!
+                        1. <strong class="text-slate-300">"Projeyi İndir (.zip)"</strong> butonuna bas<br>
+                        2. GitHub depona yükle<br>
+                        3. Render’da <strong class="text-slate-300">Publish Directory: ./</strong> seç
                     </p>
                 </div>
-
+                
                 <div class="space-y-2.5">
-                    <button onclick="downloadZip()" id="downloadBtn" disabled class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 disabled:cursor-not-allowed text-white font-bold rounded-xl shadow-lg transition flex items-center justify-center space-x-2 text-xs cursor-pointer">
-                        <i class="fa-solid fa-file-zipper text-sm"></i>
+                    <button onclick="downloadZip()" id="downloadBtn" disabled class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-35 disabled:cursor-not-allowed text-white font-bold rounded-xl shadow-lg transition flex items-center justify-center space-x-2 text-sm cursor-pointer">
+                        <i class="fa-solid fa-file-zipper"></i>
                         <span>Projeyi İndir (.zip)</span>
                     </button>
                     
-                    <button onclick="viewFullCode()" id="viewCodeBtn" disabled class="w-full py-3 bg-slate-800 hover:bg-slate-700 disabled:opacity-40 disabled:cursor-not-allowed text-slate-200 font-bold rounded-xl transition border border-slate-700 flex items-center justify-center space-x-2 text-xs cursor-pointer">
-                        <i class="fa-solid fa-code text-sm"></i>
+                    <button onclick="viewFullCode()" id="viewCodeBtn" disabled class="w-full py-3.5 bg-slate-800 hover:bg-slate-700 disabled:opacity-35 disabled:cursor-not-allowed text-slate-200 font-bold rounded-xl transition border border-slate-700 flex items-center justify-center space-x-2 text-sm cursor-pointer">
+                        <i class="fa-solid fa-code"></i>
                         <span>Kaynak Kodları İncele</span>
                     </button>
                 </div>
             </div>
         </section>
 
-        <!-- Preview and Code Canvas -->
+        <!-- Sağ Canvas -->
         <section class="flex-1 flex flex-col bg-slate-950 overflow-hidden relative">
-            <div class="h-14 border-b border-slate-800 px-6 flex items-center justify-between bg-slate-900 shrink-0">
+            <div class="h-14 border-b border-slate-800/80 px-5 flex items-center justify-between bg-slate-900/60 shrink-0">
                 <div class="flex items-center space-x-2">
-                    <button onclick="switchTab('preview')" id="tabPreview" class="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 transition cursor-pointer flex items-center space-x-1.5">
+                    <button onclick="switchTab('preview')" id="tabPreview" class="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/25 transition cursor-pointer flex items-center space-x-1.5">
                         <i class="fa-solid fa-eye"></i> <span>Canlı Önizleme</span>
                     </button>
-                    <button onclick="switchTab('code')" id="tabCode" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:bg-slate-800 transition cursor-pointer flex items-center space-x-1.5">
-                        <i class="fa-solid fa-file-code"></i> <span>Kaynak Kod (HTML)</span>
+                    <button onclick="switchTab('code')" id="tabCode" class="px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:bg-slate-800/80 transition cursor-pointer flex items-center space-x-1.5">
+                        <i class="fa-solid fa-file-code"></i> <span>Kaynak Kod</span>
                     </button>
                 </div>
-
                 <div class="flex items-center space-x-2 text-xs text-slate-400">
-                    <span id="statusIndicator" class="hidden flex items-center"><i class="fa-solid fa-circle-notch fa-spin mr-2 text-emerald-400"></i> Yapay zeka modülü kod üretiyor...</span>
+                    <span id="statusIndicator" class="hidden flex items-center bg-emerald-500/10 text-emerald-400 px-3 py-1.5 rounded-lg border border-emerald-500/20">
+                        <i class="fa-solid fa-circle-notch fa-spin mr-2"></i> Yapay zeka kod üretiyor...
+                    </span>
                 </div>
             </div>
-
-            <!-- Canvas View Area -->
+            
             <div class="flex-1 relative overflow-hidden flex flex-col">
                 <div id="previewContainer" class="flex-1 w-full h-full bg-slate-900 flex items-center justify-center relative">
-                    <div id="placeholderState" class="text-center p-8 max-w-sm">
-                        <div class="w-16 h-16 bg-slate-800 rounded-2xl flex items-center justify-center mx-auto mb-4 text-emerald-400 text-2xl shadow-inner border border-slate-700">
+                    <div id="placeholderState" class="text-center p-8 max-w-md">
+                        <div class="w-20 h-20 bg-slate-800/80 rounded-3xl flex items-center justify-center mx-auto mb-5 text-emerald-400 text-3xl shadow-inner border border-slate-700/60 animate-float">
                             <i class="fa-solid fa-code"></i>
                         </div>
-                        <h3 class="font-bold text-sm mb-1 text-white">Önizleme Bekleniyor</h3>
-                        <p class="text-xs text-slate-400">Soldaki panele konseptini girip oluştur butonuna basın.</p>
+                        <h3 class="font-bold text-base mb-2 text-white">Önizleme Bekleniyor</h3>
+                        <p class="text-sm text-slate-400">Soldaki panele konseptini girip <strong class="text-emerald-400">Otomatik Kodla</strong> butonuna bas.</p>
                     </div>
-                    <iframe id="previewFrame" class="w-full h-full border-0 hidden"></iframe>
+                    <iframe id="previewFrame" class="w-full h-full border-0 hidden bg-white"></iframe>
                 </div>
-
-                <div id="codeContainer" class="flex-1 w-full h-full bg-slate-950 text-slate-200 font-mono text-xs p-5 overflow-auto hidden">
-                    <pre><code id="codeOutput" class="language-html">/* Henüz kod üretilmedi */</code></pre>
+                
+                <div id="codeContainer" class="flex-1 w-full h-full bg-slate-950 text-slate-300 font-mono text-xs p-5 overflow-auto hidden">
+                    <pre class="leading-relaxed"><code id="codeOutput" class="language-html">/* Henüz kod üretilmedi */</code></pre>
                 </div>
             </div>
         </section>
-
     </main>
 
-    <!-- SAĞ ALT CANLI DESTEK ASİSTANI -->
+    <!-- Canlı Destek -->
     <div class="fixed bottom-6 right-6 z-50">
-        <div id="chatBox" class="hidden mb-3 w-80 md:w-96 bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl flex flex-col overflow-hidden">
-            <div class="bg-gradient-to-r from-emerald-600 to-cyan-600 text-white p-4 flex justify-between items-center shadow-md">
+        <div id="chatBox" class="hidden mb-3 w-80 md:w-96 bg-slate-900 border border-slate-700/80 rounded-3xl shadow-2xl flex flex-col overflow-hidden glow-emerald">
+            <div class="bg-gradient-to-r from-emerald-600 to-cyan-600 text-white p-4 flex justify-between items-center">
                 <div class="flex items-center space-x-2.5">
-                    <div class="w-3 h-3 rounded-full bg-emerald-300 animate-pulse"></div>
+                    <div class="w-2.5 h-2.5 rounded-full bg-emerald-300 animate-pulse"></div>
                     <div>
-                        <div class="font-bold text-xs">Canlı Asistan & Destek</div>
-                        <div class="text-[10px] text-emerald-100 opacity-90">Çevrimiçi / STRYKER Sistem</div>
+                        <div class="font-bold text-xs">Canlı Asistan</div>
+                        <div class="text-[10px] text-emerald-100/90">Çevrimiçi • STRYKER</div>
                     </div>
                 </div>
-                <button onclick="toggleChat()" class="text-white hover:text-slate-200 text-sm cursor-pointer p-1"><i class="fa-solid fa-xmark"></i></button>
+                <button onclick="toggleChat()" class="text-white/90 hover:text-white text-sm cursor-pointer p-1"><i class="fa-solid fa-xmark"></i></button>
             </div>
             
-            <div id="chatMessages" class="p-4 h-72 overflow-y-auto space-y-3 text-xs flex flex-col bg-slate-950/70">
-                <div class="bg-slate-800 text-slate-200 p-3 rounded-2xl max-w-[85%] self-start shadow-sm border border-slate-700/50">
-                    Merhaba STRYKER! Ben asistanınım. Tasarım veya kodlama hakkında bana her şeyi sorabilirsin.
+            <div id="chatMessages" class="p-4 h-72 overflow-y-auto space-y-3 text-xs flex flex-col bg-slate-950/80">
+                <div class="bg-slate-800 text-slate-200 p-3.5 rounded-2xl max-w-[85%] self-start shadow-sm border border-slate-700/50">
+                    Merhaba STRYKER! Ben asistanınım. Tasarım veya kodlama hakkında her şeyi sorabilirsin.
                 </div>
             </div>
-
+            
             <div class="p-3 border-t border-slate-800 bg-slate-900 flex gap-2">
                 <input type="text" id="chatInput" onkeypress="handleChatKey(event)" placeholder="Sorunuzu yazın..." class="flex-1 bg-slate-950 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs focus:outline-none focus:border-emerald-500 text-white placeholder-slate-600">
-                <button onclick="sendChatMessage()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2.5 rounded-xl text-xs transition cursor-pointer shadow-md font-bold"><i class="fa-solid fa-paper-plane"></i></button>
+                <button onclick="sendChatMessage()" class="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2.5 rounded-xl text-xs transition cursor-pointer shadow-md font-bold">
+                    <i class="fa-solid fa-paper-plane"></i>
+                </button>
             </div>
         </div>
-
+        
         <button onclick="toggleChat()" class="w-14 h-14 bg-gradient-to-tr from-emerald-600 to-cyan-500 hover:opacity-90 text-white rounded-2xl shadow-2xl flex items-center justify-center text-xl transition transform hover:scale-105 cursor-pointer border border-emerald-400/30">
             <i class="fa-solid fa-headset"></i>
         </button>
     </div>
 
     <script>
-        let generatedHtmlContent = "";
+        // ⚠️ BURAYA KENDİ GEÇERLİ API ANAHTARINI YAZ
+        // https://aistudio.google.com/apikey adresinden al
         const API_KEY = "AQ.Ab8RN6LgCtz_ASJDnmZSGLowFV-dBBAM_K3Bcl8nRGpoZKC6RQ";
+        
+        let generatedHtmlContent = "";
 
         function closeWelcomeModal() {
             document.getElementById('welcomeModal').classList.add('hidden');
@@ -255,20 +282,22 @@
             const codeContainer = document.getElementById('codeContainer');
 
             if (tab === 'preview') {
-                previewTab.className = "px-4 py-2 rounded-xl text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 transition cursor-pointer flex items-center space-x-1.5";
-                codeTab.className = "px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:bg-slate-800 transition cursor-pointer flex items-center space-x-1.5";
+                previewTab.className = "px-4 py-2 rounded-xl text-xs font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/25 transition cursor-pointer flex items-center space-x-1.5";
+                codeTab.className = "px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:bg-slate-800/80 transition cursor-pointer flex items-center space-x-1.5";
                 previewContainer.classList.remove('hidden');
                 codeContainer.classList.add('hidden');
             } else {
-                codeTab.className = "px-4 py-2 rounded-xl text-xs font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 transition cursor-pointer flex items-center space-x-1.5";
-                previewTab.className = "px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:bg-slate-800 transition cursor-pointer flex items-center space-x-1.5";
+                codeTab.className = "px-4 py-2 rounded-xl text-xs font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/25 transition cursor-pointer flex items-center space-x-1.5";
+                previewTab.className = "px-4 py-2 rounded-xl text-xs font-bold text-slate-400 hover:bg-slate-800/80 transition cursor-pointer flex items-center space-x-1.5";
                 codeContainer.classList.remove('hidden');
                 previewContainer.classList.add('hidden');
             }
         }
 
         async function callGeminiApi(promptText, systemInstructionText) {
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
+            // DÜZELTİLEN KISIM: Header ile authentication
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent`;
+            
             const payload = {
                 contents: [{ parts: [{ text: promptText }] }],
                 systemInstruction: { parts: [{ text: systemInstructionText }] }
@@ -276,14 +305,24 @@
 
             const response = await fetch(apiUrl, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-goog-api-key': API_KEY   // ← Kritik düzeltme
+                },
                 body: JSON.stringify(payload)
             });
 
             const result = await response.json();
+
+            if (!response.ok) {
+                const errMsg = result.error?.message || `HTTP ${response.status}`;
+                throw new Error(errMsg);
+            }
+
             if (result.error) {
                 throw new Error(result.error.message || 'API Hatası');
             }
+
             return result.candidates?.[0]?.content?.parts?.[0]?.text;
         }
 
@@ -306,12 +345,15 @@
             statusIndicator.classList.remove('hidden');
             placeholderState.classList.add('hidden');
 
-            const systemInstruction = "Sen profesyonel bir Full-Stack Web Geliştiricisisin. Kullanıcının isteğine göre eksiksiz, modern, Tailwind CSS kullanan, tamamen duyarlı (responsive), şık ikonlara (FontAwesome) ve yüksek estetiğe sahip tek dosyalık bir HTML (index.html) sayfası üret. Sadece saf HTML kodunu dön ve markdown blokları (```html ... ```) haricinde hiçbir ek metin veya açıklama yazma.";
+            const systemInstruction = `Sen profesyonel bir Full-Stack Web Geliştiricisisin. Kullanıcının isteğine göre eksiksiz, modern, Tailwind CSS kullanan, tamamen duyarlı (responsive), şık ikonlara (FontAwesome) ve yüksek estetiğe sahip tek dosyalık bir HTML (index.html) sayfası üret. 
+Sadece saf HTML kodunu dön. Markdown blokları (\`\`\`html ... \`\`\`) veya herhangi bir açıklama yazma. Direkt <!DOCTYPE html> ile başla.`;
 
             try {
                 let rawText = await callGeminiApi(prompt, systemInstruction);
+                
                 if (rawText) {
-                    rawText = rawText.replace(/^```html\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/, '');
+                    // Temizle
+                    rawText = rawText.replace(/^```html\s*/i, '').replace(/^```\s*/i, '').replace(/\s*```$/i, '').trim();
                     generatedHtmlContent = rawText;
 
                     previewFrame.classList.remove('hidden');
@@ -321,13 +363,16 @@
                     document.getElementById('codeOutput').textContent = generatedHtmlContent;
                     downloadBtn.disabled = false;
                     viewCodeBtn.disabled = false;
+                    
+                    switchTab('preview');
                 } else {
-                    throw new Error('Sistemden yanıt alınamadı.');
+                    throw new Error('Sistemden boş yanıt alındı.');
                 }
             } catch (error) {
                 console.error(error);
-                alert('Hata oluştu: ' + error.message);
+                alert('Hata oluştu:\n\n' + error.message + '\n\nÇözüm: Google AI Studio\'dan (aistudio.google.com) yeni bir API anahtarı alıp koddaki API_KEY değerini değiştir.');
                 placeholderState.classList.remove('hidden');
+                previewFrame.classList.add('hidden');
             } finally {
                 generateBtn.disabled = false;
                 generateBtn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i><span>Web Sitesini Otomatik Kodla</span>';
@@ -337,10 +382,18 @@
 
         function downloadZip() {
             if (!generatedHtmlContent) return;
+
             const zip = new JSZip();
             zip.file("index.html", generatedHtmlContent);
-            const renderYaml = `services:\n  - type: web\n    name: stryker-project\n    env: static\n    staticPublishPath: ./\n`;
+            
+            const renderYaml = `services:
+  - type: web
+    name: stryker-project
+    env: static
+    staticPublishPath: ./
+`;
             zip.file("render.yaml", renderYaml);
+
             zip.generateAsync({ type: "blob" }).then(function(content) {
                 saveAs(content, "stryker-web-project.zip");
             });
@@ -350,10 +403,9 @@
             switchTab('code');
         }
 
-        // Canlı Destek Asistanı
+        // Chat
         function toggleChat() {
-            const chatBox = document.getElementById('chatBox');
-            chatBox.classList.toggle('hidden');
+            document.getElementById('chatBox').classList.toggle('hidden');
         }
 
         function handleChatKey(e) {
@@ -368,37 +420,35 @@
             const chatMessages = document.getElementById('chatMessages');
 
             const userMsg = document.createElement('div');
-            userMsg.className = "bg-emerald-600 text-white p-3 rounded-2xl max-w-[85%] self-end shadow-sm font-medium";
+            userMsg.className = "bg-emerald-600 text-white p-3.5 rounded-2xl max-w-[85%] self-end shadow-sm font-medium";
             userMsg.textContent = message;
             chatMessages.appendChild(userMsg);
-
             input.value = '';
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
             const loadingMsg = document.createElement('div');
-            loadingMsg.className = "bg-slate-800 text-slate-400 p-3 rounded-2xl max-w-[85%] self-start shadow-sm text-[11px] border border-slate-700/50 flex items-center space-x-2";
-            loadingMsg.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin text-emerald-400"></i><span>Yapay zeka düşünüyor...</span>';
+            loadingMsg.className = "bg-slate-800 text-slate-400 p-3.5 rounded-2xl max-w-[85%] self-start shadow-sm text-[11px] border border-slate-700/50 flex items-center space-x-2";
+            loadingMsg.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin text-emerald-400"></i><span>Düşünüyor...</span>';
             chatMessages.appendChild(loadingMsg);
             chatMessages.scrollTop = chatMessages.scrollHeight;
 
-            const chatSystemInstruction = "Sen STRYKER Web Builder panelinin resmi asistanısın. Kullanıcıya her zaman kibar, kısa ve yardımsever yanıtlar ver.";
+            const chatSystemInstruction = "Sen STRYKER Web Builder panelinin resmi asistanısın. Kullanıcıya her zaman kibar, kısa, net ve yardımsever yanıtlar ver. Türkçe konuş.";
 
             try {
                 let botReply = await callGeminiApi(message, chatSystemInstruction);
                 chatMessages.removeChild(loadingMsg);
 
                 const botMsg = document.createElement('div');
-                botMsg.className = "bg-slate-800 text-slate-200 p-3 rounded-2xl max-w-[85%] self-start shadow-sm border border-slate-700/50";
+                botMsg.className = "bg-slate-800 text-slate-200 p-3.5 rounded-2xl max-w-[85%] self-start shadow-sm border border-slate-700/50";
                 botMsg.textContent = botReply || "Yanıt alınamadı.";
                 chatMessages.appendChild(botMsg);
                 chatMessages.scrollTop = chatMessages.scrollHeight;
-
             } catch (error) {
                 console.error(error);
                 chatMessages.removeChild(loadingMsg);
                 const errorMsg = document.createElement('div');
-                errorMsg.className = "bg-rose-900/50 text-rose-200 p-3 rounded-2xl max-w-[85%] self-start shadow-sm border border-rose-800";
-                errorMsg.textContent = "Bağlantı hatası oluştu: " + error.message;
+                errorMsg.className = "bg-rose-900/40 text-rose-200 p-3.5 rounded-2xl max-w-[85%] self-start shadow-sm border border-rose-800/50";
+                errorMsg.textContent = "Bağlantı hatası: " + error.message;
                 chatMessages.appendChild(errorMsg);
             }
         }
