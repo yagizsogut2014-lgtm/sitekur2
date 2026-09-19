@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gemini AI Web Sitesi Oluşturucu</title>
+    <title>STRYKER Web Builder</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome Icons -->
@@ -18,12 +18,12 @@
             theme: {
                 extend: {
                     colors: {
-                        gemini: {
+                        stryker: {
                             50: '#f0f4f9',
                             100: '#d3e3fd',
-                            500: '#1a73e8',
-                            600: '#1557b0',
-                            700: '#0f3f82',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
                         }
                     }
                 }
@@ -52,15 +52,15 @@
             </div>
             <div>
                 <h1 class="font-bold text-lg bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">STRYKER Web Builder</h1>
-                <p class="text-xs text-slate-500 dark:text-slate-400">Yapay Zeka ile Anında Site Oluşturucu</p>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Yapay Zeka Destekli Otomatik Site Oluşturucu</p>
             </div>
         </div>
 
-        <!-- API Key & Controls -->
+        <!-- Controls -->
         <div class="flex items-center space-x-3">
-            <div class="hidden sm:flex items-center space-x-2 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700">
-                <input type="password" id="apiKeyInput" placeholder="Gemini API Key Gir..." class="bg-transparent text-xs outline-none w-40 dark:text-white">
-                <button onclick="saveApiKey()" class="text-xs bg-blue-600 hover:bg-blue-700 text-white px-2 py-1 rounded transition">Kaydet</button>
+            <div class="hidden md:flex items-center space-x-2 bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span class="text-xs font-medium">Sistem Aktif</span>
             </div>
             <button onclick="toggleDarkMode()" class="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition">
                 <i class="fa-solid fa-moon dark:hidden"></i>
@@ -89,9 +89,9 @@
                     </div>
                 </div>
 
-                <button id="generateBtn" onclick="generateWebsite()" class="mt-4 w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium rounded-xl shadow-lg shadow-blue-500/25 transition flex items-center justify-center space-x-2">
+                <button id="generateBtn" onclick="generateWebsite()" class="mt-4 w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-medium rounded-xl shadow-lg shadow-blue-500/25 transition flex items-center justify-center space-x-2 cursor-pointer">
                     <i class="fa-solid fa-wand-magic-sparkles"></i>
-                    <span>Web Sitesini Yapay Zeka ile Oluştur</span>
+                    <span>Web Sitesini Otomatik Oluştur</span>
                 </button>
             </div>
 
@@ -109,12 +109,12 @@
                 </div>
 
                 <div class="space-y-2">
-                    <button onclick="downloadZip()" id="downloadBtn" disabled class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium rounded-xl shadow-md transition flex items-center justify-center space-x-2 text-sm">
+                    <button onclick="downloadZip()" id="downloadBtn" disabled class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-50 disabled:cursor-not-allowed text-white font-medium rounded-xl shadow-md transition flex items-center justify-center space-x-2 text-sm cursor-pointer">
                         <i class="fa-solid fa-file-zipper"></i>
                         <span>Projeyi İndir (.zip)</span>
                     </button>
                     
-                    <button onclick="viewFullCode()" id="viewCodeBtn" disabled class="w-full py-2.5 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium rounded-xl transition flex items-center justify-center space-x-2 text-sm">
+                    <button onclick="viewFullCode()" id="viewCodeBtn" disabled class="w-full py-2.5 bg-slate-200 dark:bg-slate-800 hover:bg-slate-300 dark:hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed font-medium rounded-xl transition flex items-center justify-center space-x-2 text-sm cursor-pointer">
                         <i class="fa-solid fa-code"></i>
                         <span>Kodları Görüntüle</span>
                     </button>
@@ -126,16 +126,16 @@
             <!-- View Mode Switcher Header -->
             <div class="h-14 border-b border-slate-200 dark:border-slate-800 px-6 flex items-center justify-between bg-white dark:bg-slate-900 shrink-0">
                 <div class="flex items-center space-x-2">
-                    <button onclick="switchTab('preview')" id="tabPreview" class="px-4 py-1.5 rounded-lg text-sm font-medium bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 transition">
+                    <button onclick="switchTab('preview')" id="tabPreview" class="px-4 py-1.5 rounded-lg text-sm font-medium bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 transition cursor-pointer">
                         <i class="fa-solid fa-eye mr-1.5"></i> Canlı Önizleme
                     </button>
-                    <button onclick="switchTab('code')" id="tabCode" class="px-4 py-1.5 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                    <button onclick="switchTab('code')" id="tabCode" class="px-4 py-1.5 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer">
                         <i class="fa-solid fa-file-code mr-1.5"></i> Kaynak Kod (HTML)
                     </button>
                 </div>
 
                 <div class="flex items-center space-x-2 text-xs text-slate-500 dark:text-slate-400">
-                    <span id="statusIndicator" class="hidden flex items-center"><i class="fa-solid fa-circle-notch fa-spin mr-1.5 text-blue-500"></i> Yapay zeka kodları yazıyor...</span>
+                    <span id="statusIndicator" class="hidden flex items-center"><i class="fa-solid fa-circle-notch fa-spin mr-1.5 text-blue-500"></i> Sistem sitenizi kodluyor...</span>
                 </div>
             </div>
 
@@ -164,24 +164,9 @@
 
     <script>
         let generatedHtmlContent = "";
-
-        // Sayfa açıldığında localStorage'dan API Key'i yükle
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedKey = localStorage.getItem('gemini_api_key');
-            if (savedKey) {
-                document.getElementById('apiKeyInput').value = savedKey;
-            }
-        });
-
-        function saveApiKey() {
-            const key = document.getElementById('apiKeyInput').value.trim();
-            if (key) {
-                localStorage.setItem('gemini_api_key', key);
-                alert('API Key tarayıcıya başarıyla kaydedildi!');
-            } else {
-                alert('Lütfen geçerli bir API Key girin.');
-            }
-        }
+        
+        // STRYKER Özel API Key
+        const API_KEY = "AQ.Ab8RN6J7EDA5BQE7G32LFUeYuIrF0UdqbxD2z1UHwuzhUtYguQ";
 
         function toggleDarkMode() {
             document.documentElement.classList.toggle('dark');
@@ -198,25 +183,19 @@
             const codeContainer = document.getElementById('codeContainer');
 
             if (tab === 'preview') {
-                previewTab.className = "px-4 py-1.5 rounded-lg text-sm font-medium bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 transition";
-                codeTab.className = "px-4 py-1.5 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition";
+                previewTab.className = "px-4 py-1.5 rounded-lg text-sm font-medium bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 transition cursor-pointer";
+                codeTab.className = "px-4 py-1.5 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer";
                 previewContainer.classList.remove('hidden');
                 codeContainer.classList.add('hidden');
             } else {
-                codeTab.className = "px-4 py-1.5 rounded-lg text-sm font-medium bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 transition";
-                previewTab.className = "px-4 py-1.5 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition";
+                codeTab.className = "px-4 py-1.5 rounded-lg text-sm font-medium bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 transition cursor-pointer";
+                previewTab.className = "px-4 py-1.5 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition cursor-pointer";
                 codeContainer.classList.remove('hidden');
                 previewContainer.classList.add('hidden');
             }
         }
 
         async function generateWebsite() {
-            const apiKey = document.getElementById('apiKeyInput').value.trim() || localStorage.getItem('gemini_api_key');
-            if (!apiKey) {
-                alert('Lütfen sağ üstteki alana Gemini API Key girip "Kaydet" butonuna basın.');
-                return;
-            }
-
             const prompt = document.getElementById('promptInput').value.trim();
             if (!prompt) {
                 alert('Lütfen web sitesi için bir açıklama giriniz.');
@@ -242,7 +221,7 @@
                 systemInstruction: { parts: [{ text: systemInstruction }] }
             };
 
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
 
             try {
                 let response = await fetch(apiUrl, {
@@ -274,7 +253,7 @@
                     downloadBtn.disabled = false;
                     viewCodeBtn.disabled = false;
                 } else {
-                    throw new Error(result.error?.message || 'Yapay zekadan geçerli bir yanıt alınamadı.');
+                    throw new Error(result.error?.message || 'Sistemden geçerli bir yanıt alınamadı.');
                 }
             } catch (error) {
                 console.error(error);
@@ -282,7 +261,7 @@
                 placeholderState.classList.remove('hidden');
             } finally {
                 generateBtn.disabled = false;
-                generateBtn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i><span>Web Sitesini Yapay Zeka ile Oluştur</span>';
+                generateBtn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i><span>Web Sitesini Otomatik Oluştur</span>';
                 statusIndicator.classList.add('hidden');
             }
         }
@@ -303,7 +282,7 @@
             zip.file("render.yaml", renderYaml);
 
             zip.generateAsync({ type: "blob" }).then(function(content) {
-                saveAs(content, "ai-website-project.zip");
+                saveAs(content, "stryker-website-project.zip");
             });
         }
 
